@@ -1,4 +1,4 @@
-# Emojify
+# Vid
 
 ## Project setup
 ```
