@@ -6,16 +6,16 @@
       xmlns="http://www.w3.org/2000/svg" 
       xmlns:xlink="http://www.w3.org/1999/xlink" 
       class="chart" 
+      height="50vh"
       aria-labelledby="title" 
       >
 
-       <!--3 consider slider interface (double) -->
        <!--2 how many ocurrences / averages within time frame -->
 
       <!-- width = normalized difference between .start and .end -->
         <title id="title">Metadata </title>
         <g v-for="(item, index) in json.named_entities" v-bind:key="index" class="bar" >
-          <rect v-if="inRange(item)" @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :y="index + 10" :fill="colors1[Math.floor(Math.random() * colors1.length)]"></rect>
+          <rect v-if="inRange(item)" @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :y="index + index * 5" :fill="colors1[Math.floor(Math.random() * colors1.length)]"></rect>
         </g>
         <!-- <g v-for="(item, index) in json.recognized_people" v-bind:key="item + index" class="bar" >
           <rect @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :y="20" :fill="colors2[Math.floor(Math.random() * colors2.length)]"></rect>
