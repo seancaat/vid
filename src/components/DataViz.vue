@@ -9,23 +9,19 @@
       aria-labelledby="title" 
       >
 
-       <!--1 show actually meta data on hover perhaps -->
        <!--3 consider slider interface (double) -->
        <!--2 how many ocurrences / averages within time frame -->
 
       <!-- width = normalized difference between .start and .end -->
         <title id="title">Metadata </title>
         <g v-for="(item, index) in json.named_entities" v-bind:key="index" class="bar" >
-          <!-- show if in timeframe -->
-          <!-- x to be set by time -->
-          <rect width="5" :height="20" :x="item.start * 2" :fill="colors1[Math.floor(Math.random() * colors1.length)]"></rect>
+          <rect @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :fill="colors1[Math.floor(Math.random() * colors1.length)]"></rect>
         </g>
-        <g v-for="(item, index) in json.recognized_people" v-bind:key="item + index" class="bar" >
-          <!-- show if in timeframe -->
-          <!-- x to be set by time -->
-          <rect width="5" :height="20" :x="item.start * 2" :fill="colors2[Math.floor(Math.random() * colors2.length)]"></rect>
-        </g>
+        <!-- <g v-for="(item, index) in json.recognized_people" v-bind:key="item + index" class="bar" >
+          <rect @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :y="20" :fill="colors2[Math.floor(Math.random() * colors2.length)]"></rect>
+        </g> -->
       </svg>
+      <p ref="metadataDisplay"></p>
     </figure>
 </template>
 
@@ -173,6 +169,9 @@ export default {
     },
     map(a,b,c,d) {
 
+    },
+    showMetadata(index) {
+      this.$refs.metadataDisplay.innerHTML = JSON.stringify(this.json.named_entities[index], null, 2);
     }
   }
 };
@@ -182,19 +181,30 @@ export default {
 figure {
   display: block;
   width: 100%;
+  border: 1px solid black;
+  margin: 0;
 
   figcaption {
     display: block;
     max-width: 100%;
   }
+
+  p {
+    max-width: 50%;
+  }
 }
 svg {
   width: 100%;
   rect {
+    stroke: white;
+
     &:hover {
       cursor: pointer;
+      stroke: black;
+      filter: saturate(200%);
     }
   }
 }
+
 
 </style>
