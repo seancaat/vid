@@ -8,7 +8,6 @@ yarn install
 ## Environment variable setup
 
 - create a file called .env.local (it will not be committed to the repo)
-- fill out all of the necessary variables `VUE_APP_AIRTABLE_API_KEY=...`
 
 ### Compiles and hot-reloads for development
 ```
