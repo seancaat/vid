@@ -15,7 +15,7 @@
       <!-- width = normalized difference between .start and .end -->
         <title id="title">Metadata </title>
         <g v-for="(item, index) in json.named_entities" v-bind:key="index" class="bar" >
-          <rect @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :fill="colors1[Math.floor(Math.random() * colors1.length)]"></rect>
+          <rect v-if="inRange(item)" @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :y="index + 10" :fill="colors1[Math.floor(Math.random() * colors1.length)]"></rect>
         </g>
         <!-- <g v-for="(item, index) in json.recognized_people" v-bind:key="item + index" class="bar" >
           <rect @click="showMetadata(index)" :width="item.end - item.start" :height="20" :x="item.start * 2" :y="20" :fill="colors2[Math.floor(Math.random() * colors2.length)]"></rect>
@@ -172,6 +172,13 @@ export default {
     },
     showMetadata(index) {
       this.$refs.metadataDisplay.innerHTML = JSON.stringify(this.json.named_entities[index], null, 2);
+    },
+    inRange(item) {
+      if (item.start >= this.start && item.end <= this.end) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };
